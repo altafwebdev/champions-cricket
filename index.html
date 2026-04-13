@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Champions Cricket Academy | Train Like a Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #004d26;
+            --accent-gold: #c5a059;
+            --light-gold: #f4e9d5;
+            --white: #ffffff;
+            --dark: #1a1a1a;
+            --gray: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .nav-logo {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 77, 38, 0.7), rgba(0, 77, 38, 0.7)), 
+                        url('https://images.unsplash.com/photo-1531415074968-036ba1b575da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            background: var(--accent-gold);
+            color: var(--primary-green);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: transform 0.3s, background 0.3s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: var(--white);
+        }
+
+        /* Sections General */
+        section {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--accent-gold);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Programs Section */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background: var(--white);
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .program-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-10px);
+        }
+
+        .program-card i {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .price {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin: 15px 0;
+        }
+
+        /* Coaches Section */
+        .coaches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .coach-card {
+            text-align: center;
+        }
+
+        .coach-img {
+            width: 150px;
+            height: 150px;
+            background: var(--gray);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            border: 4px solid var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Gallery Placeholder */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1/1;
+            background: #eee;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+            border: 2px dashed #ccc;
+        }
+
+        /* Registration & Contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: var(--light-gold);
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .whatsapp-btn i {
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-green);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            .contact-container { grid-template-columns: 1fr; }
+            section { padding: 50px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">CHAMPIONS ACADEMY</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#coaches">Coaches</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#register">Register</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1>Building the Next Stars <br> of Pakistan Cricket</h1>
+        <p>Expert coaching, world-class facilities, and the discipline to turn talent into greatness.</p>
+        <a href="#register" class="btn">Start Your Journey</a>
+    </section>
+
+    <section id="programs">
+        <div class="section-title">
+            <h2>Training Programs</h2>
+        </div>
+        <div class="programs-grid">
+            <div class="program-card">
+                <i class="fas fa-child"></i>
+                <h3>Junior Program</h3>
+                <p>Ages 8-13. Fundamentals of batting, bowling, and teamwork.</p>
+                <span class="price">PKR 5,000 / month</span>
+            </div>
+            <div class="program-card">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Advanced Program</h3>
+                <p>Ages 14-18. Focus on technique refinement and match strategy.</p>
+                <span class="price">PKR 8,000 / month</span>
+            </div>
+            <div class="program-card">
+                <i class="fas fa-trophy"></i>
+                <h3>Professional</h3>
+                <p>Club level & higher. High-intensity drills and mental conditioning.</p>
+                <span class="price">PKR 12,000 / month</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="coaches" style="background: var(--gray);">
+        <div class="section-title">
+            <h2>Our Expert Coaches</h2>
+        </div>
+        <div class="coaches-grid">
+            <div class="coach-card">
+                <div class="coach-img"><i class="fas fa-user fa-3x"></i></div>
+                <h3>Coach Ahmed</h3>
+                <p>Head Coach - Ex-First Class Player</p>
+            </div>
+            <div class="coach-card">
+                <div class="coach-img"><i class="fas fa-user fa-3x"></i></div>
+                <h3>Coach Bilal</h3>
+                <p>Bowling Specialist</p>
+            </div>
+            <div class="coach-card">
+                <div class="coach-img"><i class="fas fa-user fa-3x"></i></div>
+                <h3>Coach Sara</h3>
+                <p>Fitness & Agility Lead</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="section-title">
+            <h2>Academy Gallery</h2>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">Action Shot Placeholder</div>
+            <div class="gallery-item">Net Practice Placeholder</div>
+            <div class="gallery-item">Trophy Room Placeholder</div>
+            <div class="gallery-item">Main Pitch Placeholder</div>
+        </div>
+    </section>
+
+    <section id="register">
+        <div class="section-title">
+            <h2>Join the Champions</h2>
+        </div>
+        <div class="contact-container">
+            <div>
+                <h3>Registration Form</h3>
+                <p style="margin-bottom: 20px;">Fill out the form and our team will get back to you within 24 hours.</p>
+                <form>
+                    <input type="text" placeholder="Student Name" required>
+                    <input type="number" placeholder="Age" required>
+                    <select required>
+                        <option value="">Select Program</option>
+                        <option>Junior (PKR 5,000)</option>
+                        <option>Advanced (PKR 8,000)</option>
+                        <option>Professional (PKR 12,000)</option>
+                    </select>
+                    <input type="tel" placeholder="Parent/Guardian Contact Number" required>
+                    <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">Submit Registration</button>
+                </form>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+                <h3>Direct Inquiry</h3>
+                <p>Have questions? Chat with our admissions officer directly on WhatsApp.</p>
+                <a href="https://wa.me/923001234567" class="whatsapp-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Chat via WhatsApp
+                </a>
+                <div style="margin-top: 30px;">
+                    <p><strong><i class="fas fa-map-marker-alt"></i> Location:</strong> Model Town, Lahore, Pakistan</p>
+                    <p><strong><i class="fas fa-clock"></i> Hours:</strong> Mon - Sat (3 PM to 8 PM)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Champions Cricket Academy Pakistan. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
