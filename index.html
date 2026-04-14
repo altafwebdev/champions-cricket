@@ -1,404 +1,1043 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Champions Cricket Academy | Train Like a Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary-green: #004d26;
-            --accent-gold: #c5a059;
-            --light-gold: #f4e9d5;
-            --white: #ffffff;
-            --dark: #1a1a1a;
-            --gray: #f4f4f4;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Champions Cricket Academy — Forge Your Legacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* --- RESET & ROOT ------------------------------------ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --g9: #0A1A0A;
+  --g8: #0F2A0F;
+  --g7: #1A3D1A;
+  --g6: #1E5128;
+  --g5: #2D7A2D;
+  --g4: #3A9142;
+  --g3: #4CAF50;
+  --g2: #81C784;
+  --g1: #C8E6C9;
+  --gold: #D4A017;
+  --gold-lt: #F0C040;
+  --gold-dim: #8B6914;
+  --gold-bg: #1A1200;
+  --cream: #FDF8EE;
+  --off: #F5F0E8;
+  --white: #FFFFFF;
+  --text: #0A1A0A;
+  --mute: #4A5E4A;
+  --border: #2A4A2A;
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  --font-head: 'Oswald', sans-serif;
+  --font-cond: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            scroll-behavior: smooth;
-        }
+  --r: 4px;
+  --r-md: 8px;
+  --r-lg: 14px;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--g9);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: default;
+}
 
-        h1, h2, h3, .nav-logo {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-        }
+/* --- NAV --------------------------------------------- */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 72px;
+  background: rgba(10,26,10,0.92);
+  border-bottom: 1px solid rgba(212,160,23,0.25);
+  backdrop-filter: blur(16px);
+  transition: background 0.3s;
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-emblem {
+  width: 46px; height: 46px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logo-emblem svg { width: 100%; height: 100%; }
+.logo-text { line-height: 1.1; }
+.logo-text .l1 { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--gold-lt); letter-spacing: 2px; text-transform: uppercase; }
+.logo-text .l2 { font-family: var(--font-cond); font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 3px; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+.nav-links a {
+  font-family: var(--font-cond); font-size: 0.95rem; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.75); text-decoration: none;
+  padding: 8px 14px; border-radius: var(--r);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-links a:hover { color: var(--gold-lt); }
+.nav-cta {
+  background: var(--gold) !important; color: var(--g9) !important;
+  font-weight: 700 !important; padding: 9px 20px !important;
+  border-radius: var(--r) !important;
+  box-shadow: 0 0 20px rgba(212,160,23,0.35);
+  transition: all 0.2s !important;
+}
+.nav-cta:hover { background: var(--gold-lt) !important; transform: translateY(-1px); box-shadow: 0 4px 28px rgba(212,160,23,0.5) !important; }
+.ham { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.ham span { display: block; width: 26px; height: 2px; background: var(--gold-lt); border-radius: 2px; transition: 0.25s; }
+.mob-menu {
+  display: none; position: fixed; top: 72px; left: 0; right: 0; z-index: 999;
+  background: rgba(10,26,10,0.98);
+  border-bottom: 1px solid rgba(212,160,23,0.2);
+  padding: 1.5rem 5%;
+  backdrop-filter: blur(16px);
+}
+.mob-menu.open { display: block; }
+.mob-menu a {
+  display: block; font-family: var(--font-cond); font-size: 1.1rem; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.8);
+  text-decoration: none; padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transition: color 0.2s;
+}
+.mob-menu a:last-child { border-bottom: none; color: var(--gold-lt); padding-top: 1.2rem; }
 
-        /* Navigation */
-        nav {
-            background: var(--primary-green);
-            color: var(--white);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+/* --- HERO -------------------------------------------- */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 140px 5% 100px;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(42,145,66,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(212,160,23,0.08) 0%, transparent 60%),
+    linear-gradient(180deg, #071207 0%, #0A1A0A 60%, #0F2A0F 100%);
+}
+.hero-pitch {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 140%; max-width: 1600px; opacity: 0.06; z-index: 0;
+}
+.hero-pitch svg { width: 100%; }
+.hero-content { position: relative; z-index: 1; max-width: 900px; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-cond); font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase; color: var(--gold);
+  border: 1px solid rgba(212,160,23,0.35); border-radius: 2px;
+  padding: 6px 18px; margin-bottom: 1.8rem;
+  background: rgba(212,160,23,0.06);
+  animation: fadeUp 0.8s ease both;
+}
+.hero-tag::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+.hero-tag::after  { content: ''; width: 24px; height: 1px; background: var(--gold); }
+.hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(3rem, 9vw, 7rem);
+  font-weight: 700; line-height: 0.95;
+  text-transform: uppercase; letter-spacing: -1px;
+  margin-bottom: 1.2rem;
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+.hero h1 .line1 { display: block; color: var(--white); }
+.hero h1 .line2 { display: block; color: var(--gold-lt); -webkit-text-stroke: 1px var(--gold); }
+.hero h1 .line3 { display: block; color: var(--white); }
+.hero-sub {
+  font-size: 1.1rem; color: rgba(255,255,255,0.65); max-width: 560px; margin: 0 auto 2.5rem;
+  line-height: 1.75; font-weight: 400;
+  animation: fadeUp 0.8s 0.28s ease both;
+}
+.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.8s 0.4s ease both; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-cond); font-size: 1rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+  padding: 14px 32px; border-radius: var(--r); cursor: pointer; border: none;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-gold { background: var(--gold); color: var(--g9); box-shadow: 0 4px 24px rgba(212,160,23,0.4); }
+.btn-gold:hover { background: var(--gold-lt); box-shadow: 0 8px 32px rgba(212,160,23,0.6); }
+.btn-ghost { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.35); }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold-lt); }
+.btn-green { background: var(--g5); color: var(--white); box-shadow: 0 4px 20px rgba(45,122,45,0.35); }
+.btn-green:hover { background: var(--g4); box-shadow: 0 6px 28px rgba(45,122,45,0.5); }
+.hero-stats {
+  display: flex; gap: 0; justify-content: center; margin-top: 5rem;
+  border: 1px solid rgba(212,160,23,0.2); border-radius: var(--r-lg);
+  background: rgba(15,42,15,0.6); backdrop-filter: blur(8px);
+  overflow: hidden; max-width: 680px; margin-left: auto; margin-right: auto;
+  animation: fadeUp 0.8s 0.55s ease both;
+}
+.hero-stat {
+  flex: 1; padding: 1.5rem 1rem; text-align: center;
+  border-right: 1px solid rgba(212,160,23,0.15);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat .num { font-family: var(--font-head); font-size: 2rem; font-weight: 700; color: var(--gold-lt); display: block; line-height: 1; }
+.hero-stat .lbl { font-family: var(--font-cond); font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 4px; display: block; }
+.scroll-indicator {
+  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 1;
+  animation: fadeUp 1s 0.8s ease both;
+}
+.scroll-indicator span { font-family: var(--font-cond); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(212,160,23,0.6), transparent); animation: scrollPulse 2s ease-in-out infinite; }
 
-        .nav-logo {
-            font-size: 1.5rem;
-            color: var(--accent-gold);
-            letter-spacing: 1px;
-        }
+/* --- SECTIONS COMMON --------------------------------- */
+section { padding: 100px 5%; }
+.container { max-width: 1140px; margin: 0 auto; }
+.sec-head { margin-bottom: 4rem; }
+.sec-head.center { text-align: center; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-cond); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+.eyebrow::before { content: ''; display: inline-block; width: 28px; height: 2px; background: var(--gold); }
+.sec-title {
+  font-family: var(--font-head); font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 700; text-transform: uppercase; line-height: 1.0;
+  color: var(--white); letter-spacing: 0px;
+}
+.sec-sub {
+  font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 1.75;
+  max-width: 540px; margin-top: 0.9rem;
+}
+.sec-head.center .sec-sub { margin-left: auto; margin-right: auto; }
+.gold-accent { color: var(--gold-lt); }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
+/* --- PROGRAMS ---------------------------------------- */
+.programs-section { background: var(--g9); }
+.programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: rgba(212,160,23,0.15); border: 1.5px solid rgba(212,160,23,0.15); border-radius: var(--r-lg); overflow: hidden; }
+.prog-card {
+  background: var(--g8); padding: 2.5rem 2rem;
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+  display: flex; flex-direction: column;
+}
+.prog-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--gold); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.prog-card:hover { background: #122212; }
+.prog-card:hover::before { transform: scaleX(1); }
+.prog-number {
+  font-family: var(--font-head); font-size: 5rem; font-weight: 700;
+  color: rgba(212,160,23,0.08); line-height: 1; position: absolute;
+  top: 1rem; right: 1.5rem; letter-spacing: -3px; pointer-events: none;
+  transition: color 0.3s;
+}
+.prog-card:hover .prog-number { color: rgba(212,160,23,0.12); }
+.prog-badge {
+  display: inline-flex; align-items: center;
+  font-family: var(--font-cond); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 2px; margin-bottom: 1.5rem; width: fit-content;
+}
+.badge-junior { background: rgba(45,122,45,0.2); color: var(--g3); border: 1px solid rgba(45,122,45,0.3); }
+.badge-advanced { background: rgba(212,160,23,0.15); color: var(--gold-lt); border: 1px solid rgba(212,160,23,0.3); }
+.badge-pro { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.15); }
+.prog-card h3 {
+  font-family: var(--font-head); font-size: 1.7rem; font-weight: 700;
+  text-transform: uppercase; color: var(--white); margin-bottom: 0.5rem; line-height: 1.1;
+}
+.prog-age { font-family: var(--font-cond); font-size: 0.82rem; letter-spacing: 1px; color: rgba(255,255,255,0.4); margin-bottom: 1.2rem; }
+.prog-desc { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.65; margin-bottom: 1.8rem; flex: 1; }
+.prog-features { list-style: none; margin-bottom: 2rem; }
+.prog-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.87rem; color: rgba(255,255,255,0.72); padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.prog-features li:last-child { border-bottom: none; }
+.prog-features li::before {
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(45,122,45,0.2); border: 1.5px solid var(--g3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='%234CAF50' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: center;
+}
+.prog-fee-box {
+  background: rgba(212,160,23,0.07); border: 1px solid rgba(212,160,23,0.2);
+  border-radius: var(--r-md); padding: 1rem 1.2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.fee-label { font-family: var(--font-cond); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.fee-amount { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: var(--gold-lt); }
+.fee-period { font-family: var(--font-cond); font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+.prog-enrol {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 1rem; padding: 10px;
+  font-family: var(--font-cond); font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.1); border-radius: var(--r);
+  transition: all 0.2s;
+}
+.prog-enrol:hover { color: var(--gold-lt); border-color: rgba(212,160,23,0.4); background: rgba(212,160,23,0.05); }
+.prog-card.featured { background: #0E2610; }
+.prog-card.featured::before { transform: scaleX(1); }
 
-        .nav-links li {
-            margin-left: 20px;
-        }
+/* --- COACHES ------------------------------------------ */
+.coaches-section {
+  background: linear-gradient(180deg, #0A1A0A 0%, #071207 100%);
+  position: relative;
+}
+.coaches-section::before {
+  content: ''; position: absolute; inset: 0; opacity: 0.03;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(212,160,23,0.5) 40px, rgba(212,160,23,0.5) 41px),
+                    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(212,160,23,0.5) 40px, rgba(212,160,23,0.5) 41px);
+  pointer-events: none;
+}
+.coaches-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.coach-card {
+  position: relative; border-radius: var(--r-lg); overflow: hidden;
+  background: var(--g8); border: 1px solid rgba(212,160,23,0.1);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.coach-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.5); border-color: rgba(212,160,23,0.3); }
+.coach-photo {
+  height: 260px; overflow: hidden; position: relative;
+  background: linear-gradient(135deg, var(--g7), var(--g6));
+}
+.coach-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.4s; filter: grayscale(20%); }
+.coach-card:hover .coach-photo img { transform: scale(1.06); }
+.coach-photo-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.5rem;
+}
+.coach-initials {
+  width: 90px; height: 90px; border-radius: 50%;
+  background: rgba(212,160,23,0.15); border: 2px solid rgba(212,160,23,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-size: 2rem; font-weight: 700; color: var(--gold-lt);
+}
+.coach-role-bar {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(15,42,15,0.95), transparent);
+  padding: 2rem 1.2rem 0.8rem;
+}
+.coach-specialty {
+  font-family: var(--font-cond); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+  display: inline-block; margin-bottom: 2px;
+}
+.coach-body { padding: 1.4rem 1.5rem 1.8rem; }
+.coach-name { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; text-transform: uppercase; color: var(--white); margin-bottom: 4px; }
+.coach-qual { font-family: var(--font-cond); font-size: 0.82rem; color: var(--gold); font-weight: 600; margin-bottom: 0.75rem; letter-spacing: 0.5px; }
+.coach-bio { font-size: 0.88rem; color: rgba(255,255,255,0.58); line-height: 1.65; margin-bottom: 1.2rem; }
+.coach-stats { display: flex; gap: 0; border: 1px solid rgba(212,160,23,0.15); border-radius: var(--r-md); overflow: hidden; }
+.coach-stat { flex: 1; text-align: center; padding: 0.75rem 0.5rem; border-right: 1px solid rgba(212,160,23,0.1); }
+.coach-stat:last-child { border-right: none; }
+.coach-stat .n { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; color: var(--gold-lt); display: block; line-height: 1; }
+.coach-stat .l { font-family: var(--font-cond); font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-top: 3px; display: block; }
 
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
+/* --- GALLERY ----------------------------------------- */
+.gallery-section { background: var(--g9); overflow: hidden; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 220px 220px;
+  gap: 6px; border-radius: var(--r-lg); overflow: hidden;
+  margin-top: 3rem;
+}
+.gal-item {
+  position: relative; overflow: hidden;
+  background: var(--g7);
+  cursor: pointer;
+}
+.gal-item:first-child { grid-row: 1 / 3; }
+.gal-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s, filter 0.3s; filter: grayscale(30%) brightness(0.85); }
+.gal-item:hover img { transform: scale(1.08); filter: grayscale(0%) brightness(1); }
+.gal-placeholder {
+  width: 100%; height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0.5rem;
+  background: linear-gradient(135deg, var(--g7) 0%, var(--g6) 100%);
+}
+.gal-placeholder svg { opacity: 0.25; }
+.gal-placeholder span { font-family: var(--font-cond); font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.gal-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,26,10,0.7) 0%, transparent 50%);
+  opacity: 0; transition: opacity 0.3s;
+  display: flex; align-items: flex-end; padding: 1rem;
+}
+.gal-item:hover .gal-overlay { opacity: 1; }
+.gal-tag { font-family: var(--font-cond); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-lt); font-weight: 700; }
 
-        .nav-links a:hover {
-            color: var(--accent-gold);
-        }
+/* --- REGISTRATION ------------------------------------ */
+.reg-section {
+  background: linear-gradient(135deg, #071207 0%, #0A1A0A 50%, #071207 100%);
+  position: relative; overflow: hidden;
+}
+.reg-section::after {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,160,23,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.reg-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; position: relative; z-index: 1; }
+.reg-left { }
+.reg-left p { font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.75; margin-bottom: 2rem; }
+.reg-perks { list-style: none; margin-bottom: 2.5rem; }
+.reg-perks li {
+  display: flex; align-items: center; gap: 12px;
+  padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.92rem; color: rgba(255,255,255,0.75);
+}
+.reg-perks li:last-child { border-bottom: none; }
+.perk-dot { width: 32px; height: 32px; border-radius: 6px; background: rgba(212,160,23,0.1); border: 1px solid rgba(212,160,23,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.95rem; }
+.wa-big {
+  display: flex; align-items: center; gap: 12px;
+  background: #1A7A3C; color: var(--white);
+  padding: 16px 30px; border-radius: var(--r-md);
+  font-family: var(--font-cond); font-size: 1.05rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none;
+  box-shadow: 0 4px 24px rgba(26,122,60,0.4);
+  transition: background 0.2s, transform 0.18s, box-shadow 0.18s;
+  width: fit-content;
+}
+.wa-big:hover { background: #228B47; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,122,60,0.55); }
+.wa-big svg { width: 26px; height: 26px; flex-shrink: 0; }
+.reg-form {
+  background: rgba(15,42,15,0.4); border: 1px solid rgba(212,160,23,0.18);
+  border-radius: var(--r-lg); padding: 2.2rem 2rem;
+  backdrop-filter: blur(8px);
+}
+.reg-form h3 {
+  font-family: var(--font-head); font-size: 1.35rem; font-weight: 700;
+  text-transform: uppercase; color: var(--white); margin-bottom: 0.35rem;
+}
+.reg-form .form-sub { font-size: 0.85rem; color: rgba(255,255,255,0.45); margin-bottom: 1.5rem; padding-bottom: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.fg { display: flex; flex-direction: column; gap: 5px; margin-bottom: 0.85rem; }
+.fg.full { grid-column: 1 / -1; }
+.fg label { font-family: var(--font-cond); font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.fg input, .fg select, .fg textarea {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--r); padding: 11px 14px;
+  font-family: var(--font-body); font-size: 0.92rem; color: var(--white);
+  transition: border-color 0.2s, background 0.2s; outline: none;
+  -webkit-appearance: none; appearance: none;
+}
+.fg input::placeholder, .fg textarea::placeholder { color: rgba(255,255,255,0.25); }
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  border-color: rgba(212,160,23,0.5); background: rgba(212,160,23,0.04);
+  box-shadow: 0 0 0 3px rgba(212,160,23,0.08);
+}
+.fg select option { background: #0A1A0A; }
+.fg textarea { resize: vertical; min-height: 80px; }
+.form-submit {
+  width: 100%; margin-top: 0.5rem; padding: 14px;
+  background: var(--gold); color: var(--g9);
+  font-family: var(--font-cond); font-size: 1rem; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  border: none; border-radius: var(--r); cursor: pointer;
+  box-shadow: 0 4px 20px rgba(212,160,23,0.35);
+  transition: background 0.2s, transform 0.18s, box-shadow 0.18s;
+}
+.form-submit:hover { background: var(--gold-lt); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(212,160,23,0.5); }
 
-        /* Hero Section */
-        .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0, 77, 38, 0.7), rgba(0, 77, 38, 0.7)), 
-                        url('https://images.unsplash.com/photo-1531415074968-036ba1b575da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-            padding: 0 20px;
-        }
+/* --- FEES TABLE -------------------------------------- */
+.fees-section { background: var(--g9); }
+.fees-wrap { overflow-x: auto; border-radius: var(--r-lg); border: 1px solid rgba(212,160,23,0.15); margin-top: 2.5rem; }
+table { width: 100%; border-collapse: collapse; min-width: 600px; }
+thead { background: rgba(212,160,23,0.08); }
+thead th {
+  font-family: var(--font-cond); font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold);
+  padding: 1rem 1.4rem; text-align: left; border-bottom: 1px solid rgba(212,160,23,0.2);
+}
+tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.15s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: rgba(212,160,23,0.04); }
+tbody td { padding: 1rem 1.4rem; font-size: 0.92rem; color: rgba(255,255,255,0.8); }
+tbody td:first-child { font-family: var(--font-cond); font-weight: 600; color: var(--white); letter-spacing: 0.5px; }
+.fee-highlight { color: var(--gold-lt) !important; font-family: var(--font-head) !important; font-size: 1.05rem !important; }
+.tag-pill {
+  display: inline-block; font-family: var(--font-cond); font-size: 0.68rem;
+  font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 2px;
+}
+.pill-jr { background: rgba(45,122,45,0.2); color: var(--g3); }
+.pill-adv { background: rgba(212,160,23,0.15); color: var(--gold-lt); }
+.pill-pro { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.75); }
+.note { font-size: 0.82rem; color: rgba(255,255,255,0.35); margin-top: 1rem; font-style: italic; }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
+/* --- FOOTER ------------------------------------------ */
+footer {
+  background: #060E06; border-top: 1px solid rgba(212,160,23,0.15);
+  padding: 4rem 5% 2rem;
+}
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; max-width: 1140px; margin: 0 auto; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.footer-brand { }
+.footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+.footer-logo .l1 { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--gold-lt); letter-spacing: 2px; text-transform: uppercase; }
+.footer-bio { font-size: 0.87rem; color: rgba(255,255,255,0.4); line-height: 1.75; max-width: 240px; }
+.footer-col h5 { font-family: var(--font-cond); font-size: 0.72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.55rem; }
+.footer-col ul li a { font-size: 0.87rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--gold-lt); }
+.footer-col p { font-size: 0.87rem; color: rgba(255,255,255,0.45); line-height: 1.8; }
+.footer-col a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+.footer-col a:hover { color: var(--gold-lt); }
+.footer-bottom { max-width: 1140px; margin: 2rem auto 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.2); font-family: var(--font-cond); letter-spacing: 1px; }
+.footer-tagline { font-family: var(--font-head); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: rgba(212,160,23,0.3); }
 
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
+/* --- REVEAL ANIMATIONS ------------------------------- */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
 
-        .btn {
-            background: var(--accent-gold);
-            color: var(--primary-green);
-            padding: 12px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: transform 0.3s, background 0.3s;
-            display: inline-block;
-        }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scrollPulse { 0%, 100% { opacity: 0.4; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.15); } }
 
-        .btn:hover {
-            transform: scale(1.05);
-            background: var(--white);
-        }
-
-        /* Sections General */
-        section {
-            padding: 80px 10%;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary-green);
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .section-title h2::after {
-            content: '';
-            width: 80px;
-            height: 4px;
-            background: var(--accent-gold);
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* Programs Section */
-        .programs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .program-card {
-            background: var(--white);
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 40px 20px;
-            text-align: center;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .program-card:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-10px);
-        }
-
-        .program-card i {
-            font-size: 3rem;
-            color: var(--primary-green);
-            margin-bottom: 20px;
-        }
-
-        .price {
-            display: block;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-green);
-            margin: 15px 0;
-        }
-
-        /* Coaches Section */
-        .coaches-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .coach-card {
-            text-align: center;
-        }
-
-        .coach-img {
-            width: 150px;
-            height: 150px;
-            background: var(--gray);
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            border: 4px solid var(--accent-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        /* Gallery Placeholder */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .gallery-item {
-            aspect-ratio: 1/1;
-            background: #eee;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-style: italic;
-            border: 2px dashed #ccc;
-        }
-
-        /* Registration & Contact */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            background: var(--light-gold);
-            padding: 40px;
-            border-radius: 15px;
-        }
-
-        form input, form select, form textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .whatsapp-btn i {
-            margin-right: 10px;
-            font-size: 1.4rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary-green);
-            color: var(--white);
-            text-align: center;
-            padding: 40px 0;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .nav-links { display: none; }
-            .contact-container { grid-template-columns: 1fr; }
-            section { padding: 50px 5%; }
-        }
-    </style>
+/* --- RESPONSIVE -------------------------------------- */
+@media (max-width: 960px) {
+  .nav-links { display: none; }
+  .ham { display: flex; }
+  .programs-grid { grid-template-columns: 1fr; }
+  .coaches-grid { grid-template-columns: 1fr 1fr; }
+  .reg-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 180px); }
+  .gal-item:first-child { grid-row: auto; }
+}
+@media (max-width: 640px) {
+  section { padding: 70px 5%; }
+  .coaches-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .hero-stats { flex-direction: row; }
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 150px); }
+}
+@media (max-width: 420px) {
+  .hero-btns { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 280px; justify-content: center; }
+  .hero-stats { flex-direction: column; }
+}
+</style>
 </head>
 <body>
 
-    <nav>
-        <div class="nav-logo">CHAMPIONS ACADEMY</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#programs">Programs</a></li>
-            <li><a href="#coaches">Coaches</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#register">Register</a></li>
+<!-- --- NAV -------------------------------------------- -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="logo-emblem">
+      <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="23,3 29,16 44,18 33,29 36,44 23,37 10,44 13,29 2,18 17,16" fill="none" stroke="#D4A017" stroke-width="1.5"/>
+        <circle cx="23" cy="23" r="8" fill="rgba(212,160,23,0.15)" stroke="#D4A017" stroke-width="1"/>
+        <line x1="23" y1="15" x2="23" y2="31" stroke="#F0C040" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="15" y1="23" x2="31" y2="23" stroke="#F0C040" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <div class="l1">Champions</div>
+      <div class="l2">Cricket Academy</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#coaches">Coaches</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#fees">Fees</a></li>
+    <li><a href="#register" class="nav-cta">Enrol Now</a></li>
+  </ul>
+  <button class="ham" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#programs" onclick="closeNav()">Programs</a>
+  <a href="#coaches" onclick="closeNav()">Coaches</a>
+  <a href="#gallery" onclick="closeNav()">Gallery</a>
+  <a href="#fees" onclick="closeNav()">Fees</a>
+  <a href="#register" onclick="closeNav()">? Enrol Now</a>
+</div>
+
+<!-- --- HERO -------------------------------------------- -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-pitch">
+    <svg viewBox="0 0 1200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="600" cy="150" rx="560" ry="140" stroke="white" stroke-width="1"/>
+      <ellipse cx="600" cy="150" rx="400" ry="100" stroke="white" stroke-width="0.5"/>
+      <circle cx="600" cy="150" r="60" stroke="white" stroke-width="0.5"/>
+      <line x1="600" y1="10" x2="600" y2="290" stroke="white" stroke-width="0.5"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">Est. 2008 — Lahore, Pakistan</div>
+    <h1>
+      <span class="line1">Forge Your</span>
+      <span class="line2">Cricket</span>
+      <span class="line3">Legacy</span>
+    </h1>
+    <p class="hero-sub">Pakistan's premier cricket academy — where raw talent meets elite coaching, rigorous training, and the relentless pursuit of excellence on the pitch.</p>
+    <div class="hero-btns">
+      <a href="#register" class="btn btn-gold">Enrol Today</a>
+      <a href="#programs" class="btn btn-ghost">View Programs</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">16+</span><span class="lbl">Years Strong</span></div>
+      <div class="hero-stat"><span class="num">1,200+</span><span class="lbl">Players Trained</span></div>
+      <div class="hero-stat"><span class="num">48</span><span class="lbl">First-Class Alumni</span></div>
+      <div class="hero-stat"><span class="num">6</span><span class="lbl">Elite Coaches</span></div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- --- PROGRAMS ---------------------------------------- -->
+<section class="programs-section" id="programs">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Training Programs</div>
+      <h2 class="sec-title">Choose Your <span class="gold-accent">Path</span></h2>
+      <p class="sec-sub">Three distinct programs built for every stage of a cricketer's journey — from first swings to first-class dreams.</p>
+    </div>
+    <div class="programs-grid">
+
+      <!-- JUNIOR -->
+      <div class="prog-card reveal">
+        <span class="prog-number">01</span>
+        <span class="prog-badge badge-junior">Junior</span>
+        <h3>Junior Program</h3>
+        <div class="prog-age">Ages 8 – 15 &nbsp;|&nbsp; Beginner to Intermediate</div>
+        <p class="prog-desc">Build a rock-solid cricketing foundation. Our junior program focuses on technique, love for the game, and developing the mental habits that turn young players into future stars.</p>
+        <ul class="prog-features">
+          <li>Batting fundamentals &amp; footwork drills</li>
+          <li>Basic bowling action &amp; run-up</li>
+          <li>Fielding &amp; catching fundamentals</li>
+          <li>Physical fitness &amp; agility training</li>
+          <li>Inter-academy match practice</li>
+          <li>Monthly performance report cards</li>
         </ul>
-    </nav>
+        <div class="prog-fee-box">
+          <div><div class="fee-label">Monthly Fee</div><div class="fee-amount">Rs. 4,500<span class="fee-period"> /mo</span></div></div>
+          <div><div class="fee-label">Sessions</div><div class="fee-amount" style="font-size:1.1rem;">5× / wk</div></div>
+        </div>
+        <a href="#register" class="prog-enrol">Enrol in Junior ?</a>
+      </div>
 
-    <section class="hero" id="home">
-        <h1>Building the Next Stars <br> of Pakistan Cricket</h1>
-        <p>Expert coaching, world-class facilities, and the discipline to turn talent into greatness.</p>
-        <a href="#register" class="btn">Start Your Journey</a>
-    </section>
+      <!-- ADVANCED -->
+      <div class="prog-card featured reveal reveal-delay-1">
+        <span class="prog-number">02</span>
+        <span class="prog-badge badge-advanced">? Most Popular</span>
+        <h3>Advanced Program</h3>
+        <div class="prog-age">Ages 15 – 22 &nbsp;|&nbsp; Intermediate to Advanced</div>
+        <p class="prog-desc">Refine your craft under expert coaches. Advanced analysis, specialist skill camps, and competitive match experience prepare players for district and national-level cricket.</p>
+        <ul class="prog-features">
+          <li>Video analysis &amp; technical corrections</li>
+          <li>Specialist batting / bowling camps</li>
+          <li>Spin, seam &amp; pace bowling clinics</li>
+          <li>Mental toughness &amp; match strategy</li>
+          <li>District-level tournament participation</li>
+          <li>Strength &amp; conditioning program</li>
+          <li>Individual coach-player sessions</li>
+        </ul>
+        <div class="prog-fee-box">
+          <div><div class="fee-label">Monthly Fee</div><div class="fee-amount">Rs. 8,500<span class="fee-period"> /mo</span></div></div>
+          <div><div class="fee-label">Sessions</div><div class="fee-amount" style="font-size:1.1rem;">6× / wk</div></div>
+        </div>
+        <a href="#register" class="prog-enrol" style="color:var(--gold-lt); border-color:rgba(212,160,23,0.35);">Enrol in Advanced ?</a>
+      </div>
 
-    <section id="programs">
-        <div class="section-title">
-            <h2>Training Programs</h2>
+      <!-- PROFESSIONAL -->
+      <div class="prog-card reveal reveal-delay-2">
+        <span class="prog-number">03</span>
+        <span class="prog-badge badge-pro">Professional</span>
+        <h3>Pro Elite Program</h3>
+        <div class="prog-age">Ages 18+ &nbsp;|&nbsp; High Performance</div>
+        <p class="prog-desc">The pinnacle of our academy — an elite, personalised high-performance pathway for players targeting domestic, regional, or international cricket selection.</p>
+        <ul class="prog-features">
+          <li>1-on-1 personal coaching &amp; mentoring</li>
+          <li>Advanced AI-powered video analytics</li>
+          <li>NHPC &amp; PCB trial preparation</li>
+          <li>Diet, nutrition &amp; recovery plans</li>
+          <li>Full season competitive fixtures</li>
+          <li>Agent &amp; club introductions</li>
+          <li>Media &amp; interview training</li>
+        </ul>
+        <div class="prog-fee-box">
+          <div><div class="fee-label">Monthly Fee</div><div class="fee-amount">Rs. 18,000<span class="fee-period"> /mo</span></div></div>
+          <div><div class="fee-label">Sessions</div><div class="fee-amount" style="font-size:1.1rem;">Daily</div></div>
         </div>
-        <div class="programs-grid">
-            <div class="program-card">
-                <i class="fas fa-child"></i>
-                <h3>Junior Program</h3>
-                <p>Ages 8-13. Fundamentals of batting, bowling, and teamwork.</p>
-                <span class="price">PKR 5,000 / month</span>
-            </div>
-            <div class="program-card">
-                <i class="fas fa-user-graduate"></i>
-                <h3>Advanced Program</h3>
-                <p>Ages 14-18. Focus on technique refinement and match strategy.</p>
-                <span class="price">PKR 8,000 / month</span>
-            </div>
-            <div class="program-card">
-                <i class="fas fa-trophy"></i>
-                <h3>Professional</h3>
-                <p>Club level & higher. High-intensity drills and mental conditioning.</p>
-                <span class="price">PKR 12,000 / month</span>
-            </div>
-        </div>
-    </section>
+        <a href="#register" class="prog-enrol">Enrol in Pro Elite ?</a>
+      </div>
 
-    <section id="coaches" style="background: var(--gray);">
-        <div class="section-title">
-            <h2>Our Expert Coaches</h2>
-        </div>
-        <div class="coaches-grid">
-            <div class="coach-card">
-                <div class="coach-img"><i class="fas fa-user fa-3x"></i></div>
-                <h3>Coach Ahmed</h3>
-                <p>Head Coach - Ex-First Class Player</p>
-            </div>
-            <div class="coach-card">
-                <div class="coach-img"><i class="fas fa-user fa-3x"></i></div>
-                <h3>Coach Bilal</h3>
-                <p>Bowling Specialist</p>
-            </div>
-            <div class="coach-card">
-                <div class="coach-img"><i class="fas fa-user fa-3x"></i></div>
-                <h3>Coach Sara</h3>
-                <p>Fitness & Agility Lead</p>
-            </div>
-        </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section id="gallery">
-        <div class="section-title">
-            <h2>Academy Gallery</h2>
-        </div>
-        <div class="gallery-grid">
-            <div class="gallery-item">Action Shot Placeholder</div>
-            <div class="gallery-item">Net Practice Placeholder</div>
-            <div class="gallery-item">Trophy Room Placeholder</div>
-            <div class="gallery-item">Main Pitch Placeholder</div>
-        </div>
-    </section>
+<!-- --- COACHES ------------------------------------------ -->
+<section class="coaches-section" id="coaches">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <div class="eyebrow">Meet the Team</div>
+      <h2 class="sec-title">World-Class <span class="gold-accent">Coaches</span></h2>
+      <p class="sec-sub">Our coaching staff brings international experience, PCB certifications, and a genuine passion for developing Pakistan's next cricketing generation.</p>
+    </div>
+    <div class="coaches-grid">
 
-    <section id="register">
-        <div class="section-title">
-            <h2>Join the Champions</h2>
+      <div class="coach-card reveal">
+        <div class="coach-photo">
+          <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=500&q=80" alt="Head Coach Imran Khalid" loading="lazy">
+          <div class="coach-role-bar">
+            <span class="coach-specialty">Head Coach &amp; Director</span>
+          </div>
         </div>
-        <div class="contact-container">
-            <div>
-                <h3>Registration Form</h3>
-                <p style="margin-bottom: 20px;">Fill out the form and our team will get back to you within 24 hours.</p>
-                <form>
-                    <input type="text" placeholder="Student Name" required>
-                    <input type="number" placeholder="Age" required>
-                    <select required>
-                        <option value="">Select Program</option>
-                        <option>Junior (PKR 5,000)</option>
-                        <option>Advanced (PKR 8,000)</option>
-                        <option>Professional (PKR 12,000)</option>
-                    </select>
-                    <input type="tel" placeholder="Parent/Guardian Contact Number" required>
-                    <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">Submit Registration</button>
-                </form>
-            </div>
-            <div style="display: flex; flex-direction: column; justify-content: center;">
-                <h3>Direct Inquiry</h3>
-                <p>Have questions? Chat with our admissions officer directly on WhatsApp.</p>
-                <a href="https://wa.me/923001234567" class="whatsapp-btn" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Chat via WhatsApp
-                </a>
-                <div style="margin-top: 30px;">
-                    <p><strong><i class="fas fa-map-marker-alt"></i> Location:</strong> Model Town, Lahore, Pakistan</p>
-                    <p><strong><i class="fas fa-clock"></i> Hours:</strong> Mon - Sat (3 PM to 8 PM)</p>
-                </div>
-            </div>
+        <div class="coach-body">
+          <div class="coach-name">Imran Khalid</div>
+          <div class="coach-qual">Ex-Lahore Blues | PCB Level-3 Coach | M.Sc Sports Science</div>
+          <p class="coach-bio">Former first-class cricketer with 180+ matches for Lahore region. Trained under the NCA and coached at two ICC member academies. Specialist in batting strategy and mental conditioning.</p>
+          <div class="coach-stats">
+            <div class="coach-stat"><span class="n">180+</span><span class="l">FC Matches</span></div>
+            <div class="coach-stat"><span class="n">18yr</span><span class="l">Coaching</span></div>
+            <div class="coach-stat"><span class="n">PCB L3</span><span class="l">Certified</span></div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <footer>
-        <p>&copy; 2026 Champions Cricket Academy Pakistan. All Rights Reserved.</p>
-    </footer>
+      <div class="coach-card reveal reveal-delay-1">
+        <div class="coach-photo">
+          <img src="https://images.unsplash.com/photo-1607990283143-e81e7a2c9349?w=500&q=80" alt="Bowling Coach Saad Mehmood" loading="lazy">
+          <div class="coach-role-bar">
+            <span class="coach-specialty">Pace Bowling Coach</span>
+          </div>
+        </div>
+        <div class="coach-body">
+          <div class="coach-name">Saad Mehmood</div>
+          <div class="coach-qual">Ex-FATA | PCB Level-2 | MRF Pace Foundation Graduate</div>
+          <p class="coach-bio">Fast bowling specialist trained at the MRF Pace Foundation in Chennai. Expert in biomechanics, run-up optimisation, and developing reverse swing — coached three players to Pakistan U-19 level.</p>
+          <div class="coach-stats">
+            <div class="coach-stat"><span class="n">3</span><span class="l">U19 Alumni</span></div>
+            <div class="coach-stat"><span class="n">12yr</span><span class="l">Coaching</span></div>
+            <div class="coach-stat"><span class="n">MRF</span><span class="l">Graduate</span></div>
+          </div>
+        </div>
+      </div>
 
+      <div class="coach-card reveal reveal-delay-2">
+        <div class="coach-photo">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&q=80" alt="Spin Coach Bilal Ahmed" loading="lazy">
+          <div class="coach-role-bar">
+            <span class="coach-specialty">Spin &amp; Fielding Coach</span>
+          </div>
+        </div>
+        <div class="coach-body">
+          <div class="coach-name">Bilal Ahmed</div>
+          <div class="coach-qual">Ex-Sialkot Stallions | PCB Level-2 | Fielding Specialist</div>
+          <p class="coach-bio">Spin bowling and elite fielding coach with a reputation for transforming ordinary fielders into match-winners. Developed academy drills now used in three other PCB-affiliated academies across Punjab.</p>
+          <div class="coach-stats">
+            <div class="coach-stat"><span class="n">140+</span><span class="l">LS Matches</span></div>
+            <div class="coach-stat"><span class="n">10yr</span><span class="l">Coaching</span></div>
+            <div class="coach-stat"><span class="n">PCB L2</span><span class="l">Certified</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- --- GALLERY ------------------------------------------ -->
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <div class="eyebrow">Life at the Academy</div>
+      <h2 class="sec-title">Training in <span class="gold-accent">Action</span></h2>
+      <p class="sec-sub">A glimpse inside the grind — nets, match days, and the moments that make champions.</p>
+    </div>
+  </div>
+  <div style="max-width:1140px; margin:0 auto; padding:0 5%;">
+    <div class="gallery-grid reveal">
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80" alt="Cricket Training" loading="lazy">
+        <div class="gal-overlay"><span class="gal-tag">Net Session</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1631280760698-e4e4b3c3c3c0?w=500&q=80" alt="Match Day" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'gal-placeholder\'><svg width=\'40\' height=\'40\' fill=\'none\' stroke=\'white\' stroke-width=\'1.5\' viewBox=\'0 0 24 24\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><path d=\'M8 12h8M12 8v8\'/></svg><span>Match Day</span></div>'">
+        <div class="gal-overlay"><span class="gal-tag">Match Day</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1592752771318-1ef7765fdbe9?w=500&q=80" alt="Coaching Session" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'gal-placeholder\'><svg width=\'40\' height=\'40\' fill=\'none\' stroke=\'white\' stroke-width=\'1.5\' viewBox=\'0 0 24 24\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><path d=\'M8 12h8M12 8v8\'/></svg><span>Coaching Session</span></div>'">
+        <div class="gal-overlay"><span class="gal-tag">1-on-1 Coaching</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&q=80" alt="Fitness Training" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'gal-placeholder\'><svg width=\'40\' height=\'40\' fill=\'none\' stroke=\'white\' stroke-width=\'1.5\' viewBox=\'0 0 24 24\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><path d=\'M8 12h8M12 8v8\'/></svg><span>Fitness & Conditioning</span></div>'">
+        <div class="gal-overlay"><span class="gal-tag">Fitness &amp; Conditioning</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=500&q=80" alt="Junior Training" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'gal-placeholder\'><svg width=\'40\' height=\'40\' fill=\'none\' stroke=\'white\' stroke-width=\'1.5\' viewBox=\'0 0 24 24\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><path d=\'M8 12h8M12 8v8\'/></svg><span>Junior Training</span></div>'">
+        <div class="gal-overlay"><span class="gal-tag">Junior Development</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- --- FEES TABLE ------------------------------------ -->
+<section class="fees-section" id="fees">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Fee Structure</div>
+      <h2 class="sec-title">Transparent <span class="gold-accent">Pricing</span></h2>
+      <p class="sec-sub">No hidden costs. Everything you need to know about fees — upfront and clear.</p>
+    </div>
+    <div class="fees-wrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>Program</th>
+            <th>Age Group</th>
+            <th>Sessions</th>
+            <th>Monthly Fee</th>
+            <th>Registration Fee</th>
+            <th>Kit Deposit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag-pill pill-jr">Junior</span></td>
+            <td>8 – 15 Years</td>
+            <td>5 sessions / week</td>
+            <td class="fee-highlight">Rs. 4,500</td>
+            <td>Rs. 2,000 <span style="font-size:0.78rem;color:rgba(255,255,255,0.35)">(one-time)</span></td>
+            <td>Rs. 1,500</td>
+          </tr>
+          <tr>
+            <td><span class="tag-pill pill-adv">Advanced</span></td>
+            <td>15 – 22 Years</td>
+            <td>6 sessions / week</td>
+            <td class="fee-highlight">Rs. 8,500</td>
+            <td>Rs. 3,000 <span style="font-size:0.78rem;color:rgba(255,255,255,0.35)">(one-time)</span></td>
+            <td>Rs. 2,500</td>
+          </tr>
+          <tr>
+            <td><span class="tag-pill pill-pro">Pro Elite</span></td>
+            <td>18+ Years</td>
+            <td>Daily + Matches</td>
+            <td class="fee-highlight">Rs. 18,000</td>
+            <td>Rs. 5,000 <span style="font-size:0.78rem;color:rgba(255,255,255,0.35)">(one-time)</span></td>
+            <td>Rs. 5,000</td>
+          </tr>
+          <tr style="background:rgba(212,160,23,0.04);">
+            <td colspan="2" style="color:rgba(255,255,255,0.5);font-style:italic;">Special Discount Programs</td>
+            <td colspan="4" style="color:var(--gold);font-family:var(--font-cond);font-size:0.88rem;font-weight:600;letter-spacing:1px;">Sibling discount: 15% off &nbsp;|&nbsp; Early-bird (3-month): 10% off &nbsp;|&nbsp; Merit scholarship available</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">* Fees include use of academy facilities, indoor nets, and bowling machines. Playing kit, personal equipment, and tournament entry fees are separate. All fees are non-refundable after 7 days of admission.</p>
+  </div>
+</section>
+
+<!-- --- REGISTRATION ------------------------------------- -->
+<section class="reg-section" id="register">
+  <div class="container">
+    <div class="reg-inner">
+      <div class="reg-left reveal">
+        <div class="eyebrow">Join the Academy</div>
+        <h2 class="sec-title" style="margin-bottom:1rem;">Start Your<br><span class="gold-accent">Journey</span></h2>
+        <p>Seats are limited. Fill out the registration form or WhatsApp us directly and our admission team will confirm your slot within 24 hours.</p>
+        <ul class="reg-perks">
+          <li><span class="perk-dot">??</span> Free 2-hour trial session before committing</li>
+          <li><span class="perk-dot">??</span> Personalised skill assessment on Day 1</li>
+          <li><span class="perk-dot">??</span> Academy uniform included in first month</li>
+          <li><span class="perk-dot">??</span> Monthly progress updates sent to parents</li>
+          <li><span class="perk-dot">??</span> Access to inter-academy tournaments</li>
+          <li><span class="perk-dot">??</span> Easy instalment options available</li>
+        </ul>
+        <a href="https://wa.me/923211234567?text=Assalamu%20Alaikum!%20I%20want%20to%20register%20my%20child%20at%20Champions%20Cricket%20Academy.%20Please%20guide%20me." target="_blank" rel="noopener" class="wa-big">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.524 5.847L.057 23.5a.5.5 0 00.613.613l5.653-1.467A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.002-1.367l-.358-.213-3.714.964.983-3.598-.233-.37A9.818 9.818 0 1112 21.818z"/>
+          </svg>
+          WhatsApp to Register
+        </a>
+      </div>
+
+      <div class="reg-form reveal reveal-delay-1">
+        <h3>Registration Form</h3>
+        <div class="form-sub">Complete the form and we'll contact you within 24 hours</div>
+        <div class="form-grid">
+          <div class="fg">
+            <label>Player's Full Name *</label>
+            <input type="text" placeholder="e.g. Ahmed Ali Khan">
+          </div>
+          <div class="fg">
+            <label>Date of Birth *</label>
+            <input type="date">
+          </div>
+          <div class="fg">
+            <label>Guardian Name *</label>
+            <input type="text" placeholder="Parent / Guardian">
+          </div>
+          <div class="fg">
+            <label>WhatsApp Number *</label>
+            <input type="tel" placeholder="+92 3XX XXXXXXX">
+          </div>
+          <div class="fg">
+            <label>City / Area</label>
+            <input type="text" placeholder="e.g. Gulberg, Lahore">
+          </div>
+          <div class="fg">
+            <label>Preferred Program *</label>
+            <select>
+              <option value="">Select a program</option>
+              <option>Junior Program (Age 8–15)</option>
+              <option>Advanced Program (Age 15–22)</option>
+              <option>Pro Elite Program (Age 18+)</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Batting Style</label>
+            <select>
+              <option value="">Select</option>
+              <option>Right-hand Bat</option>
+              <option>Left-hand Bat</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Bowling Style</label>
+            <select>
+              <option value="">Select</option>
+              <option>Right-arm Fast</option>
+              <option>Right-arm Medium</option>
+              <option>Right-arm Spin (Off)</option>
+              <option>Right-arm Spin (Leg)</option>
+              <option>Left-arm Fast</option>
+              <option>Left-arm Spin</option>
+              <option>Non-bowler</option>
+            </select>
+          </div>
+          <div class="fg full">
+            <label>Previous Cricket Experience (if any)</label>
+            <textarea placeholder="e.g. School cricket for 2 years, played in colony tournaments..."></textarea>
+          </div>
+        </div>
+        <button class="form-submit" onclick="handleReg(this)">Submit Registration Request</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- --- FOOTER ------------------------------------------- -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <svg width="36" height="36" viewBox="0 0 46 46" fill="none">
+          <polygon points="23,3 29,16 44,18 33,29 36,44 23,37 10,44 13,29 2,18 17,16" fill="none" stroke="#D4A017" stroke-width="1.5"/>
+          <circle cx="23" cy="23" r="8" fill="rgba(212,160,23,0.15)" stroke="#D4A017" stroke-width="1"/>
+        </svg>
+        <span class="l1">Champions CCA</span>
+      </div>
+      <p class="footer-bio">Building Pakistan's future cricket stars through discipline, elite coaching, and a relentless culture of excellence since 2008.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#programs">Training Programs</a></li>
+        <li><a href="#coaches">Our Coaches</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#fees">Fee Structure</a></li>
+        <li><a href="#register">Register Now</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Programs</h5>
+      <ul>
+        <li><a href="#programs">Junior Program</a></li>
+        <li><a href="#programs">Advanced Program</a></li>
+        <li><a href="#programs">Pro Elite Program</a></li>
+        <li><a href="#register">Free Trial Session</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <p>
+        47-B, Qaddafi Stadium Road<br>
+        Lahore, Punjab, Pakistan<br><br>
+        <a href="tel:+924235001234">+92 42 3500 1234</a><br>
+        <a href="https://wa.me/923211234567" style="color:#4EDE8B;">+92 321 123 4567 (WA)</a><br><br>
+        <a href="mailto:info@championsca.pk">info@championsca.pk</a><br><br>
+        Mon – Sat: 6:00 AM – 8:00 PM<br>
+        Sunday: 7:00 AM – 2:00 PM
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Champions Cricket Academy, Lahore. All rights reserved.</div>
+    <div class="footer-tagline">Forge Your Legacy</div>
+  </div>
+</footer>
+
+<script>
+function toggleNav() { document.getElementById('mobMenu').classList.toggle('open'); }
+function closeNav() { document.getElementById('mobMenu').classList.remove('open'); }
+document.addEventListener('click', function(e) {
+  const m = document.getElementById('mobMenu');
+  const b = document.querySelector('.ham');
+  if (!m.contains(e.target) && !b.contains(e.target)) m.classList.remove('open');
+});
+
+const revObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const parent = entry.target.parentElement;
+      const siblings = parent.querySelectorAll('.reveal');
+      siblings.forEach((el, i) => { setTimeout(() => el.classList.add('in'), i * 100); });
+      revObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+function handleReg(btn) {
+  const orig = btn.textContent;
+  btn.textContent = 'Submitting…';
+  btn.style.opacity = '0.7';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = '? Received! We will WhatsApp you shortly.';
+    btn.style.background = '#1A7A3C';
+    btn.style.opacity = '1';
+    btn.style.color = '#fff';
+    btn.style.letterSpacing = '0.5px';
+  }, 1300);
+}
+
+const navEl = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  navEl.style.background = window.scrollY > 60 ? 'rgba(6,14,6,0.97)' : 'rgba(10,26,10,0.92)';
+});
+
+const sections = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
+  navAs.forEach(a => {
+    const isActive = a.getAttribute('href') === '#' + cur;
+    if (!a.classList.contains('nav-cta')) a.style.color = isActive ? '#F0C040' : '';
+  });
+}, { passive: true });
+</script>
 </body>
 </html>
